@@ -7,23 +7,24 @@ class Employee {
   final Address address;
   final int yearOfExperience;
 
-  Employee(
-    this.name,
-    this.baseSalary,
-    this.skills,
-    this.address,
-    this.yearOfExperience,
-  );
+  Employee.regular({
+    required this.name,
+    required this.baseSalary,
+    required this.skills,
+    required this.address,
+    required this.yearOfExperience,
+  });
 
-  Employee.mobileDeveloper(
-    String employeeName,
-    Address employeeAddress,
-    int employeeYearOfExperience,
-  ) : this.name = employeeName,
-      this.baseSalary = 40000,
-      this.skills = [Skill.FLUTTER, Skill.DART],
-      this.address = employeeAddress,
-      this.yearOfExperience = employeeYearOfExperience;
+  Employee.mobileDeveloper({
+    required String employeeName,
+    required double employeeBaseSalary,
+    required Address employeeAddress,
+    required int employeeYearOfExperience,
+  }) : this.name = employeeName,
+       this.baseSalary = employeeBaseSalary,
+       this.skills = [Skill.FLUTTER, Skill.DART],
+       this.address = employeeAddress,
+       this.yearOfExperience = employeeYearOfExperience;
 
   String get employeeName => name;
   double get employeeBaseSalary => baseSalary;
@@ -76,9 +77,29 @@ class Address {
 void main() {
   var address = Address('2004', 'Phnom Penh', 'AC1014');
 
-  var emp1 = Employee('Sokea', 40000, [Skill.FLUTTER], address, 2);
+  var emp1 = Employee.mobileDeveloper(
+    employeeName: 'Sokea',
+    employeeBaseSalary: 42000,
+    employeeAddress: address,
+    employeeYearOfExperience: 2,
+  );
   emp1.printDetails();
 
-  var emp2 = Employee('Ronan', 45000, [Skill.DART, Skill.OTHER], address, 1);
+  var emp2 = Employee.regular(
+    name: 'Ronan',
+    baseSalary: 45000,
+    skills: [Skill.DART],
+    address: address,
+    yearOfExperience: 1,
+  );
   emp2.printDetails();
+
+  var emp3 = Employee.regular(
+    name: 'Tola',
+    baseSalary: 43000,
+    skills: [Skill.OTHER],
+    address: address,
+    yearOfExperience: 3,
+  );
+  emp3.printDetails();
 }
